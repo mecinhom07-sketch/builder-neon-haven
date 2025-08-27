@@ -89,6 +89,7 @@ function StoreSettings() {
 
   const handleSave = async () => {
     await updateStoreConfig(formData);
+    alert('Configurações salvas com sucesso!');
   };
 
   return (

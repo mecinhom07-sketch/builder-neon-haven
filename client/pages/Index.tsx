@@ -6,7 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { ShoppingCart, Plus, Minus, Clock, MapPin, Phone, Star, Search } from 'lucide-react';
+import { ShoppingCart, Plus, Minus, Clock, MapPin, Phone, Star, Search, Settings } from 'lucide-react';
 import { Product, CartItem } from '@shared/types';
 
 function formatPrice(price: number) {
