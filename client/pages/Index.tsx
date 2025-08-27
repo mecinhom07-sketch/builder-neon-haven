@@ -435,9 +435,17 @@ export default function Index() {
       <Cart />
 
       {/* Admin Link */}
-      <div className="fixed bottom-4 left-4">
-        <Button variant="ghost" size="sm" asChild>
-          <a href="/admin">Admin</a>
+      <div className="fixed bottom-4 left-4 z-40">
+        <Button
+          variant="outline"
+          size="sm"
+          asChild
+          className="bg-card/90 backdrop-blur-sm border-restaurant-orange/20 hover:bg-restaurant-orange hover:text-restaurant-orange-foreground transition-all duration-200 shadow-lg"
+        >
+          <a href="/admin" className="flex items-center">
+            <Settings className="w-4 h-4 mr-2" />
+            Admin
+          </a>
         </Button>
       </div>
     </div>
