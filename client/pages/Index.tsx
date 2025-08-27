@@ -28,19 +28,32 @@ function ProductCard({ product, onAddToCart }: { product: Product; onAddToCart: 
   return (
     <Card className="food-card-hover overflow-hidden">
       <CardContent className="p-0">
-        <div className="aspect-video bg-gradient-to-br from-restaurant-orange/20 to-restaurant-warm/30 flex items-center justify-center relative">
+        <div className="aspect-video bg-gradient-to-br from-restaurant-orange/20 to-restaurant-warm/30 flex items-center justify-center relative overflow-hidden">
           {product.is_featured && (
-            <Badge className="absolute top-2 left-2 bg-restaurant-orange text-restaurant-orange-foreground">
+            <Badge className="absolute top-2 left-2 bg-restaurant-orange text-restaurant-orange-foreground z-10">
               <Star className="w-3 h-3 mr-1" />
               Destaque
             </Badge>
           )}
           {!product.is_available && (
-            <Badge variant="secondary" className="absolute top-2 right-2">
+            <Badge variant="secondary" className="absolute top-2 right-2 z-10">
               Indisponível
             </Badge>
           )}
-          <div className="text-6xl opacity-20">🍔</div>
+          {product.image_url ? (
+            <img
+              src={product.image_url}
+              alt={product.name}
+              className="w-full h-full object-cover"
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.style.display = 'none';
+                target.parentElement!.innerHTML += '<div class="text-6xl opacity-20">🍔</div>';
+              }}
+            />
+          ) : (
+            <div className="text-6xl opacity-20">🍔</div>
+          )}
         </div>
         <div className="p-4">
           <div className="flex justify-between items-start mb-2">
