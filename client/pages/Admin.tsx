@@ -414,6 +414,13 @@ function ProductManager() {
                   onChange={(e) => setFormData(prev => ({ ...prev, preparation_time: parseInt(e.target.value) || 15 }))}
                 />
               </div>
+              <div>
+                <Label>Imagem do Produto</Label>
+                <ImageUpload
+                  value={formData.image_url}
+                  onChange={(url) => setFormData(prev => ({ ...prev, image_url: url }))}
+                />
+              </div>
               <div className="flex items-center space-x-4">
                 <div className="flex items-center space-x-2">
                   <Switch
