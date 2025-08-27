@@ -456,28 +456,43 @@ function ProductManager() {
           return (
             <Card key={product.id}>
               <CardContent className="p-4">
-                <div className="flex items-start justify-between">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-1">
-                      <h3 className="font-semibold">{product.name}</h3>
-                      <Badge variant="outline">{category?.name}</Badge>
-                      {product.is_featured && (
-                        <Badge className="bg-restaurant-orange text-restaurant-orange-foreground">
-                          Destaque
-                        </Badge>
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex gap-4 flex-1">
+                    <div className="w-16 h-16 rounded-lg overflow-hidden bg-muted flex-shrink-0">
+                      {product.image_url ? (
+                        <img
+                          src={product.image_url}
+                          alt={product.name}
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center text-muted-foreground">
+                          📷
+                        </div>
                       )}
                     </div>
-                    <p className="text-sm text-muted-foreground mb-2">{product.description}</p>
-                    <div className="flex items-center gap-4 text-sm">
-                      <span className="font-semibold text-restaurant-orange">
-                        {formatPrice(product.price)}
-                      </span>
-                      {product.preparation_time && (
-                        <span className="flex items-center">
-                          <Clock className="w-4 h-4 mr-1" />
-                          {product.preparation_time} min
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-1">
+                        <h3 className="font-semibold">{product.name}</h3>
+                        <Badge variant="outline">{category?.name}</Badge>
+                        {product.is_featured && (
+                          <Badge className="bg-restaurant-orange text-restaurant-orange-foreground">
+                            Destaque
+                          </Badge>
+                        )}
+                      </div>
+                      <p className="text-sm text-muted-foreground mb-2">{product.description}</p>
+                      <div className="flex items-center gap-4 text-sm">
+                        <span className="font-semibold text-restaurant-orange">
+                          {formatPrice(product.price)}
                         </span>
-                      )}
+                        {product.preparation_time && (
+                          <span className="flex items-center">
+                            <Clock className="w-4 h-4 mr-1" />
+                            {product.preparation_time} min
+                          </span>
+                        )}
+                      </div>
                     </div>
                   </div>
                   <div className="flex items-center space-x-2">
