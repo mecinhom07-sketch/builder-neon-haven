@@ -150,13 +150,18 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Initialize with mock data
+  // Initialize with stored or mock data
   useEffect(() => {
     const initializeData = async () => {
       try {
-        setStoreConfig(mockStoreConfig);
-        setCategories(mockCategories);
-        setProducts(mockProducts);
+        // Load from localStorage or use mock data
+        const storedConfig = localStorage.getItem('restaurant_store_config');
+        const storedCategories = localStorage.getItem('restaurant_categories');
+        const storedProducts = localStorage.getItem('restaurant_products');
+
+        setStoreConfig(storedConfig ? JSON.parse(storedConfig) : mockStoreConfig);
+        setCategories(storedCategories ? JSON.parse(storedCategories) : mockCategories);
+        setProducts(storedProducts ? JSON.parse(storedProducts) : mockProducts);
         setIsLoading(false);
       } catch (err) {
         setError('Failed to load store data');
@@ -169,7 +174,9 @@ export function StoreProvider({ children }: { children: ReactNode }) {
 
   const updateStoreConfig = async (config: Partial<StoreConfig>) => {
     if (!storeConfig) return;
-    setStoreConfig({ ...storeConfig, ...config, updated_at: new Date().toISOString() });
+    const updatedConfig = { ...storeConfig, ...config, updated_at: new Date().toISOString() };
+    setStoreConfig(updatedConfig);
+    localStorage.setItem('restaurant_store_config', JSON.stringify(updatedConfig));
   };
 
   const addCategory = async (category: Omit<Category, 'id' | 'created_at' | 'updated_at'>) => {
@@ -179,20 +186,26 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       created_at: new Date().toISOString(),
       updated_at: new Date().toISOString(),
     };
-    setCategories(prev => [...prev, newCategory]);
+    const updatedCategories = [...categories, newCategory];
+    setCategories(updatedCategories);
+    localStorage.setItem('restaurant_categories', JSON.stringify(updatedCategories));
   };
 
   const updateCategory = async (id: string, category: Partial<Category>) => {
-    setCategories(prev =>
-      prev.map(cat =>
-        cat.id === id ? { ...cat, ...category, updated_at: new Date().toISOString() } : cat
-      )
+    const updatedCategories = categories.map(cat =>
+      cat.id === id ? { ...cat, ...category, updated_at: new Date().toISOString() } : cat
     );
+    setCategories(updatedCategories);
+    localStorage.setItem('restaurant_categories', JSON.stringify(updatedCategories));
   };
 
   const deleteCategory = async (id: string) => {
-    setCategories(prev => prev.filter(cat => cat.id !== id));
-    setProducts(prev => prev.filter(prod => prod.category_id !== id));
+    const updatedCategories = categories.filter(cat => cat.id !== id);
+    const updatedProducts = products.filter(prod => prod.category_id !== id);
+    setCategories(updatedCategories);
+    setProducts(updatedProducts);
+    localStorage.setItem('restaurant_categories', JSON.stringify(updatedCategories));
+    localStorage.setItem('restaurant_products', JSON.stringify(updatedProducts));
   };
 
   const addProduct = async (product: Omit<Product, 'id' | 'created_at' | 'updated_at'>) => {
@@ -202,20 +215,24 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       created_at: new Date().toISOString(),
       updated_at: new Date().toISOString(),
     };
-    setProducts(prev => [...prev, newProduct]);
+    const updatedProducts = [...products, newProduct];
+    setProducts(updatedProducts);
+    localStorage.setItem('restaurant_products', JSON.stringify(updatedProducts));
   };
 
   const updateProduct = async (id: string, product: Partial<Product>) => {
-    setProducts(prev =>
-      prev.map(prod =>
-        prod.id === id ? { ...prod, ...product, updated_at: new Date().toISOString() } : prod
-      )
+    const updatedProducts = products.map(prod =>
+      prod.id === id ? { ...prod, ...product, updated_at: new Date().toISOString() } : prod
     );
+    setProducts(updatedProducts);
+    localStorage.setItem('restaurant_products', JSON.stringify(updatedProducts));
   };
 
   const deleteProduct = async (id: string) => {
-    setProducts(prev => prev.filter(prod => prod.id !== id));
+    const updatedProducts = products.filter(prod => prod.id !== id);
+    setProducts(updatedProducts);
     setCart(prev => prev.filter(item => item.product.id !== id));
+    localStorage.setItem('restaurant_products', JSON.stringify(updatedProducts));
   };
 
   const addToCart = (product: Product, quantity: number, notes?: string) => {
