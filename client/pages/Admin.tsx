@@ -11,15 +11,16 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
-import { 
-  Settings, 
-  Plus, 
-  Edit, 
-  Trash2, 
-  Store, 
-  Package, 
-  Tag, 
-  Clock, 
+import { ImageUpload } from '@/components/ui/image-upload';
+import {
+  Settings,
+  Plus,
+  Edit,
+  Trash2,
+  Store,
+  Package,
+  Tag,
+  Clock,
   Phone,
   MapPin,
   DollarSign,
