@@ -14,19 +14,19 @@ export default defineConfig(({ mode }) => ({
     },
   },
   // GitHub Pages configuration
-  base: mode === 'production' ? '/builder-neon-haven/' : '/',
+  base: mode === "production" ? "/builder-neon-haven/" : "/",
   build: {
     outDir: "dist",
     sourcemap: false,
     rollupOptions: {
       output: {
         manualChunks: {
-          vendor: ['react', 'react-dom'],
-          ui: ['@radix-ui/react-dialog', '@radix-ui/react-select'],
-          supabase: ['@supabase/supabase-js']
-        }
-      }
-    }
+          vendor: ["react", "react-dom"],
+          ui: ["@radix-ui/react-dialog", "@radix-ui/react-select"],
+          supabase: ["@supabase/supabase-js"],
+        },
+      },
+    },
   },
   plugins: [react(), expressPlugin()],
   resolve: {
@@ -36,7 +36,7 @@ export default defineConfig(({ mode }) => ({
     },
   },
   optimizeDeps: {
-    exclude: ['lucide-react'],
+    exclude: ["lucide-react"],
   },
 }));
 
