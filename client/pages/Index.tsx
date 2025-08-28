@@ -128,7 +128,7 @@ function ProductCard({ product, onAddToCart }: { product: Product; onAddToCart: 
 }
 
 function Cart() {
-  const { cart, updateCartItem, removeFromCart, clearCart, getCartTotal, storeConfig } = useStore();
+  const { cart, updateCartItem, removeFromCart, clearCart, getCartTotal, storeConfig } = useSupabaseStore();
   const [isOpen, setIsOpen] = useState(false);
   const [customerData, setCustomerData] = useState({
     name: '',

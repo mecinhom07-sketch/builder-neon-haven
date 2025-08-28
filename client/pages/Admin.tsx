@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useAdminAuth } from '@/lib/use-admin-auth';
-import { useStore } from '@/lib/store-context';
+import { useSupabaseStore } from '@/lib/supabase-store-context';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -77,7 +77,7 @@ function LoginForm() {
 }
 
 function StoreSettings() {
-  const { storeConfig, updateStoreConfig } = useStore();
+  const { storeConfig, updateStoreConfig } = useSupabaseStore();
   const [formData, setFormData] = useState({
     store_name: storeConfig?.store_name || '',
     whatsapp_number: storeConfig?.whatsapp_number || '',
@@ -166,7 +166,7 @@ function StoreSettings() {
 }
 
 function CategoryManager() {
-  const { categories, addCategory, updateCategory, deleteCategory } = useStore();
+  const { categories, addCategory, updateCategory, deleteCategory } = useSupabaseStore();
   const [editingCategory, setEditingCategory] = useState<Category | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [formData, setFormData] = useState({
@@ -283,7 +283,7 @@ function CategoryManager() {
 }
 
 function ProductManager() {
-  const { products, categories, addProduct, updateProduct, deleteProduct } = useStore();
+  const { products, categories, addProduct, updateProduct, deleteProduct } = useSupabaseStore();
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [formData, setFormData] = useState({
