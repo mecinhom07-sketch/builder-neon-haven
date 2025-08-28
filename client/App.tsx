@@ -15,7 +15,7 @@ const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <StoreProvider>
+    <SupabaseStoreProvider>
       <TooltipProvider>
         <Toaster />
         <Sonner />
@@ -28,7 +28,7 @@ const App = () => (
           </Routes>
         </BrowserRouter>
       </TooltipProvider>
-    </StoreProvider>
+    </SupabaseStoreProvider>
   </QueryClientProvider>
 );
 

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useStore } from '@/lib/store-context';
+import { useSupabaseStore } from '@/lib/supabase-store-context';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -274,7 +274,7 @@ ${customerData.notes ? `*Observações:* ${customerData.notes}` : ''}`;
 }
 
 export default function Index() {
-  const { storeConfig, categories, products, addToCart, isLoading } = useStore();
+  const { storeConfig, categories, products, addToCart, isLoading } = useSupabaseStore();
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
