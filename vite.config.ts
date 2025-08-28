@@ -13,8 +13,20 @@ export default defineConfig(({ mode }) => ({
       deny: [".env", ".env.*", "*.{crt,pem}", "**/.git/**", "server/**"],
     },
   },
+  // GitHub Pages configuration
+  base: mode === 'production' ? '/builder-neon-haven/' : '/',
   build: {
-    outDir: "dist/spa",
+    outDir: "dist",
+    sourcemap: false,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          ui: ['@radix-ui/react-dialog', '@radix-ui/react-select'],
+          supabase: ['@supabase/supabase-js']
+        }
+      }
+    }
   },
   plugins: [react(), expressPlugin()],
   resolve: {
@@ -22,6 +34,9 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./client"),
       "@shared": path.resolve(__dirname, "./shared"),
     },
+  },
+  optimizeDeps: {
+    exclude: ['lucide-react'],
   },
 }));
 

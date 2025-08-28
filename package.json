@@ -15,13 +15,14 @@
     "build": "npm run build:client && npm run build:server",
     "build:client": "vite build",
     "build:server": "vite build --config vite.config.server.ts",
+    "build:pages": "vite build --mode production && cp public/404.html dist/",
     "start": "node dist/server/node-build.mjs",
     "test": "vitest --run",
     "format.fix": "prettier --write .",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "preview": "vite preview"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.56.0",
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
     "zod": "^3.25.76"
